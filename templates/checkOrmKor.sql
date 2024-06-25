@@ -1,0 +1,1 @@
+SELECT id_ormarica, sifra_ormarica FROM korisnik_ormaric WHERE id_korisnika = %s

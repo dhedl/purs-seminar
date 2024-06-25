@@ -1,0 +1,1 @@
+DELETE FROM korisnik_ormaric WHERE id_ormarica = %s AND id_korisnika = %s

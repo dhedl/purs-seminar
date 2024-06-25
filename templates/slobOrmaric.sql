@@ -1,0 +1,1 @@
+SELECT id FROM ormarici WHERE zauzet = 0 ORDER BY id LIMIT 1

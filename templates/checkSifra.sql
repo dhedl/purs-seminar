@@ -1,0 +1,1 @@
+SELECT * FROM korisnik_ormaric WHERE sifra_ormarica = %s

@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM korisnik WHERE username = %s

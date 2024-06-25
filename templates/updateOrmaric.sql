@@ -1,0 +1,1 @@
+UPDATE ormarici SET zauzet = 1 WHERE id = %s

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{naslov}}</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='styles-login.css') }}">
+</head>
+<body>
+    <div class="glavni">
+        <div class="reg-controls">
+            <label class="radio-container">
+                <input type="radio" name="form-type" value="login" checked>
+                Prijava
+            </label>
+            <label class="radio-container">
+                <input type="radio" name="form-type" value="register">
+                Registracija
+            </label>
+        </div>
+        <form id="login-form" action="/login" method="POST">
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            {% if poruka %}
+                <p class="poruka">{{ poruka }}</p>
+            {% endif %}
+            <div class="login-button">
+                <button type="submit">Log In</button>
+            </div>
+        </form>
+        <form id="register-form" action="/register" method="POST" style="display: none;">
+            <div class="input-box">
+                <input type="text" name="ime" placeholder="Ime" required>
+            </div>
+            <div class="input-box">
+                <input type="text" name="prezime" placeholder="Prezime" required>
+            </div>
+            <div class="input-box">
+                <input type="text" name="username" placeholder="Username" required>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            {% if poruka %}
+                <p class="poruka">{{ poruka }}</p>
+            {% endif %}
+            <div class="reg-button">
+                <button type="submit">Registriraj se!</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.querySelectorAll('input[type=radio][name=form-type]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                var formType = this.value;
+                if (formType === 'login') {
+                    document.getElementById('login-form').style.display = 'block';
+                    document.getElementById('register-form').style.display = 'none';
+                } else if (formType === 'register') {
+                    document.getElementById('login-form').style.display = 'none';
+                    document.getElementById('register-form').style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

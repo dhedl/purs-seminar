@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ naslov }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="kont">
+        <header>
+            <div class="user">
+                <p>{{ username }}</p>
+                <img src="{{ url_for('static', filename='images/user-icon.png') }}" alt="User Icon" width="70px">
+            </div>
+            <img class="slika2" src="{{ url_for('static', filename='images/icon.png') }}" alt="Icon" width="70px">
+        </header>
+        <nav>
+            {% if ovlasti %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% if ovlasti == 'Administrator' %}
+            <a href="?id=1">Ormarići</a>
+            <a href="?id=2">Korisnici</a>
+            <a href="?id=4">Sve aktivnosti</a>
+            {% endif %}
+            <a href="?id=3">Najam ormarića</a>
+            {% endif %}
+        </nav>
+        <main>
+            {% if id == '1' and ovlasti == 'Administrator' %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Broj ormarića</th>
+                        <th>Zauzet</th>
+                        <th colspan="2">Radnje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                    <tr>
+                        <td>{{ d[0] }}</td>
+                        <td>{{ "Da" if d[1] else "Ne" }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_ormaric', id=d[0]) }}" method="POST">
+                                <input type="submit" value="Obriši" class="btn-obrisi">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{ url_for('toggle_ormaric', id=d[0]) }}" method="POST">
+                                <input type="submit"
+                                    value="{{ 'Označi kao slobodan' if d[1] else 'Označi kao zauzet' }}"
+                                    class="{% if d[1] %} btn-slobodan {% else %} btn-zauzet {% endif %}">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="4">
+                            <form action="{{ url_for('insert_ormaric') }}" method="POST">
+                                <button type="submit" class="btn-dodaj">Dodaj novi ormarić</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endif %}
+            {% if id == '2' and ovlasti == 'Administrator' %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID korisnika</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Username</th>
+                        <th>Ovlasti</th>
+                        <th>Broj ormarića</th>
+                        <th>Broj korištenja usluge</th>
+                        <th>Akcije</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                    <tr>
+                        <td>{{ d[0] }}</td>
+                        <td>{{ d[1] }}</td>
+                        <td>{{ d[2] }}</td>
+                        <td>{{ d[3] }}</td>
+                        <td>{{ d[4] }}</td>
+                        <td>{{ d[5] }}</td>
+                        <td>{{ d[6] }}</td>
+                        <td>
+                            <form action="{{ url_for('delete_korisnik', id=d[0]) }}" method="POST">
+                                <input type="submit" value="Obriši" class="btn-obrisi">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+            {% if id == '3' %}
+            <div class="iznajmi-ormaric">
+                {% if id_ormarica and sifra %}
+                <div class="ormaric-info">
+                    <p><strong>Iznajmljen ormarić:</strong> {{ id_ormarica }}</p>
+                    <p><strong>Šifra ormarića:</strong> {{ sifra }}</p>
+                </div>
+                <form action="{{ url_for('vrati_ormaric') }}" method="POST" class="vrati-ormaric-form">
+                    <input type="hidden" name="ormaric_id" value="{{ id_ormarica }}">
+                    <button type="submit" class="btn-vrati">Vrati ormarić</button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('iznajmi_post') }}" method="POST" class="iznajmi-ormaric-form">
+                    <button type="submit" class="btn-iznajmi">Iznajmi ormarić</button>
+                </form>
+                {% endif %}
+                {% if porukaBezPopUpa %}
+                <p class="poruka">{{ poruka }}</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% if id == '4' and ovlasti == 'Administrator' %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID aktivnosti</th>
+                        <th>Ime</th>
+                        <th>Prezime</th>
+                        <th>Datum i vrijeme</th>
+                        <th>Akcija</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                    <tr>
+                        <td>{{ d[0] }}</td>
+                        <td>{{ d[1] }}</td>
+                        <td>{{ d[2] }}</td>
+                        <td>{{ d[3] }}</td>
+                        <td>{{ d[4] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </main>
+    </div>
+    <!-- Modal HTML -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modal-message"></p>
+        </div>
+    </div>
+    <!-- JavaScript for Modal -->
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close-button")[0];
+
+        // Get the message from the URL
+        var urlParams = new URLSearchParams(window.location.search);
+        var message = urlParams.get('poruka');
+
+        // When the page loads, check if there is a message
+        window.onload = function () {
+            if (message && message.trim() !== "") {
+                document.getElementById("modal-message").textContent = message;
+                modal.classList.remove('hidden');
+                modal.style.display = "flex";
+
+                // Remove the 'poruka' parameter from URL
+                urlParams.delete('poruka');
+                window.history.replaceState({}, document.title, window.location.pathname + "?" + urlParams.toString());
+            }
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.classList.add('hidden');
+            modal.style.display = "none";
+        };
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.classList.add('hidden');
+                modal.style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+
+</html>

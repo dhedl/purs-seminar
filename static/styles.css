@@ -1,0 +1,337 @@
+body{
+    background-image: url(images/background.png);
+}
+
+.kont{
+
+    margin-top: 30px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    background-color: #ADADAD;
+    border-top:3px solid #64485C;
+    border-radius: 5px;
+}
+
+header {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: #c7c7c7; 
+    border-radius: 10px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+.user{
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.user > p {
+    display: inline-block;
+    color: #64485C;
+    font-weight: bold;
+    font-family: Verdana;
+    font-size: larger;
+    margin-left: 30px;
+    margin-right: 10px;
+    
+}
+
+.slika2{
+    justify-self: end;
+    margin-right: 10px;
+}
+
+nav {
+    display: flex;
+    height: 3vw;
+    flex-direction: row;
+    justify-content: flex-start; 
+    align-items: center;
+    background-color: #3A454D;
+    font-family: Calibri, sans-serif; 
+    padding: 0 20px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+nav > a {
+    color: white;
+    text-decoration: none;
+    margin-left: 30px;
+    transition: color 0.3s ease, border-bottom 0.3s ease; 
+    padding: 10px 0; 
+    position: relative; 
+}
+
+nav > a:hover {
+    color: #FFD700; 
+    border-bottom: 2px solid #FFD700;
+}
+
+nav > a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #FFD700;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+nav > a:hover::after {
+    transform: scaleX(1);
+}
+
+main {
+    display: flex;
+    background-color: #d4d4d4;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+main > table {
+    width: 60%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+thead {
+    background-color: #3a454d;
+    color: white;
+}
+
+thead > tr > th {
+    padding: 12px 15px;
+    font-family: 'Calibri', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+tr > th, td {
+    border: 1px solid #dddddd;
+    padding: 12px 15px;
+    width: 150px;
+}
+
+tbody {
+    background-color: #ffffff;
+}
+
+tr:nth-child(even) {
+    background-color: #c2c2c2;
+}
+
+tr:hover {
+    background-color: #a8a8a8;
+    transition: background-color 0.3s ease;
+}
+
+tbody > tr > td {
+    font-family: 'Calibri', sans-serif;
+    color: #333333;
+}
+
+tfoot {
+    background-color: #3a454d;
+    color: white;
+}
+
+tfoot > tr > th, tfoot > tr > td {
+    padding: 12px 15px;
+    text-align: right;
+}
+
+.btn-slobodan {
+    background-color: #32CD32; 
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-zauzet {
+    background-color: #FF6347; 
+    color: rgb(255, 255, 255);
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.btn-obrisi {
+    background-color: #FF6347;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.btn-obrisi:hover {
+    background-color: #E6542F;
+}
+
+.btn-obrisi:active {
+    transform: translateY(5px) scale(0.9); 
+    background-color: #D14430; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); 
+}
+
+.btn-dodaj {
+    background-color: #4CAF50; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-dodaj:hover {
+    background-color: #45a049; 
+}
+
+.btn-dodaj:active {
+    transform: translateY(1px); 
+}
+
+.iznajmi-ormaric {
+    background-color: #ffffff;
+    border: 1px solid #ddd; 
+    border-radius: 12px; 
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease; 
+}
+
+.iznajmi-ormaric:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+
+.ormaric-info {
+    background-color: #f8f8f8; 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.iznajmi-ormaric p {
+    margin: 10px 0;
+    font-size: 16px; 
+    color: #333; /
+}
+
+.vrati-ormaric-form,
+.iznajmi-ormaric-form {
+    text-align: center;
+}
+
+.btn-iznajmi,
+.btn-vrati {
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    padding: 12px 24px; 
+    border-radius: 24px; 
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.btn-iznajmi:hover,
+.btn-vrati:hover {
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
+}
+
+.btn-iznajmi:active,
+.btn-vrati:active {
+    transform: translateY(0); 
+}
+
+.poruka {
+    background-color: #ffcccb; 
+    color: #a94442;
+    border: 1px solid #a94442; 
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* The Modal (background) */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    display: flex; /* Use flexbox */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+}
+
+/* Hide modal by default */
+.hidden {
+    display: none;
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Max width for the modal */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.3); /* Optional: Add a shadow */
+}
+
+/* The Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#modal-message {
+    font-size: 18px;
+    text-align: center;
+}
