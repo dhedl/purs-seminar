@@ -3,8 +3,8 @@
 #include <ArduinoJson.h>
 #include <Keypad.h>
 
-const char* ssid = "........";
-const char* password = ".....";
+const char* ssid = "osciloskop";
+const char* password = "osciloskop23";
 
 const byte ROW_NUM = 4; 
 const byte COLUMN_NUM = 4; 
